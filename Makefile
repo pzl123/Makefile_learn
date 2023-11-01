@@ -1,10 +1,15 @@
 test:
 #make -C 进入指定目录进行make命令
 	make -C ./static
+	make -C ./dynamic
+
 #将静态、动态库文件拷贝到lib目录下
 	cp ./static/libshow.a  ./lib
 	cp ./static/show_s.h  ./inc
-#cp ./dynamic/libdynamic_test.so  ./lib
+	cp ./dynamic/libdynamicshow.so  ./lib
+	cp ./dynamic/dynamichead.h  ./inc
+
+	make -C ./src
 
 install:
 #为lib目录下的动态链接库文件在/usr/lib目录下创建软连接，这里使用的必须是绝对路径
@@ -15,5 +20,10 @@ install:
 
 .PHONY:clean
 clean:
-	rm ./lib/*.a
-	rm ./inc/*.h
+	make clean -C ./dynamic
+	make clean -C ./static
+	make clean -C ./src
+	rm -rf ./bin/main
+	rm -rf ./lib/*.a
+	rm -rf ./lib/*.so
+	rm -rf ./lib/*.h

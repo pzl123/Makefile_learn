@@ -57,7 +57,6 @@ $(DIR)/%.o:$(DIR)/%.c
 .PHONY:clean
 clean:
 	rm $(OBJ) $(BIN)
-	rm ./*.a
 
 # clean:
 # 	rm -f  %.o %.a show ../inc/%.al
